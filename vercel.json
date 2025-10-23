@@ -1,0 +1,29 @@
+
+
+
+
+
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "BACKEND/src/api/index.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "FRONTEND/package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/BACKEND/src/api/index.js"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/FRONTEND/dist/index.html"
+    }
+  ]
+}
