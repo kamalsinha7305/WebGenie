@@ -6,7 +6,12 @@ import generateRoutes from './routes/generateRoutes.js';
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  // Add both your deployed and local frontend URLs to the guest list
+  origin: ['https://web-genie-omega.vercel.app/', 'http://localhost:3000'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
 app.use(express.json());
 
 // API Routes
