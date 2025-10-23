@@ -1,13 +1,16 @@
 // api/generate.js
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenAI } from "@google/genai";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+// Initialize with the API key from environment variables
+const genai = new GoogleGenAI(process.env.GEMINI_API_KEY);
 
+// Helper function to extract code blocks from Markdown
 function extractCode(text) {
   const match = text.match(/```(?:\w+)?\n?([\s\S]*?)```/);
   return match ? match[1].trim() : text.trim();
 }
 
+// Export the handler function for Vercel
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     res.setHeader("Allow", ["POST"]);
@@ -23,8 +26,9 @@ export default async function handler(req, res) {
         .json({ error: "Prompt and framework are required." });
     }
 
-    // Use a reliable model. 1.5 Flash is great.
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+    // Use the getGenerativeModel method with the new model name
+// The updated line for your api/generate.js file
+    const model = genai.getGenerativeModel({ model: "gemini-2.5-flash" });
 
     const fullPrompt = `
       You are an expert web developer specializing in modern, animated, and fully responsive UI components.
@@ -54,16 +58,10 @@ export default async function handler(req, res) {
     res.status(200).json({ code });
 
   } catch (error) {
-    // --- MODIFICATION START ---
-    // Log the detailed error to your Vercel function logs for debugging
     console.error("❌ Error calling Gemini API:", error);
-
-    // Send a more informative error message to the frontend
     res.status(500).json({
       error: "Failed to generate code from Gemini API.",
-      // Include the actual error message for better client-side debugging
       details: error.message,
     });
-    // --- MODIFICATION END ---
   }
 }
