@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "/backend/src/api/:path*"
+      "destination": "/BACKEND/api/:path*"
     }
   ]
 }
