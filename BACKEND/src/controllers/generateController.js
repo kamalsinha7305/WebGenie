@@ -12,9 +12,10 @@ const generateComponent = async (req, res) => {
     const code = await generateComponentCode(prompt, framework);
     res.status(200).json({ code });
   } catch (error) {
-    console.error("❌ Error in controller:", error);
-    res.status(500).json({ error: "Failed to generate code." });
-  }
+  // Log the entire error object to see the detailed message from the Gemini API
+  console.error('💥 DETAILED ERROR:', error); 
+  res.status(500).json({ error: "Failed to generate code.", details: error.message });
+}
 };
 
 export { generateComponent };
