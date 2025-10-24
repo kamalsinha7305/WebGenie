@@ -8,7 +8,7 @@ const app = express();
 // Middleware
 app.use(cors({
   // Add both your deployed and local frontend URLs to the guest list
-  origin: ['https://web-genie-omega.vercel.app/', 'http://localhost:3001','https://webgenie-f.onrender.com/'],
+  origin: ['https://web-genie-omega.vercel.app', 'http://localhost:3001','https://webgenie-f.onrender.com'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));

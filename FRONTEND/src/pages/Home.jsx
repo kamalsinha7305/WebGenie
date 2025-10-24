@@ -40,7 +40,7 @@ const Home = () => {
     try {
       setLoading(true);
       // Make a request to our new backend API endpoint
-      const response = await fetch(`${API_BASE_URL}/api/generate`, {
+      const response = await fetch('https://webgenie-whop.onrender.com/api/generate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
