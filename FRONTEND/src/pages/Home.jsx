@@ -30,7 +30,9 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const [isNewTabOpen, setIsNewTabOpen] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
+   
 
+  const API_BASE_URL = 'https://webgenie-whop.onrender.com';
   // This function now calls our secure serverless function
   async function getResponse() {
     if (!prompt.trim()) return toast.error("Please describe your component first");
@@ -38,7 +40,7 @@ const Home = () => {
     try {
       setLoading(true);
       // Make a request to our new backend API endpoint
-      const response = await fetch('/api/generate', {
+      const response = await fetch(`${API_BASE_URL}/api/generate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
